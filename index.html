@@ -23,18 +23,18 @@
     <script>
       var socket = io();
       $('form').submit(function(){
+	  
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
       });
-      socket.on('chat message', function(msg){
+      socket.on('chat message2', function(msg){
         //$('#messages').append($('<li>').text(msg));
 		//console.log(msg+"index.html");
 		
 		console.log(msg["isTheBikeTilted"]);
-		if(msg["isTheBikeTilted"] === "Fuck"){
-			alert("fuck yea");
-			
+		if(msg["isTheBikeTilted"] === "yes"){
+			alert("The bike is being moved");
 		}
 		
       });

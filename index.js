@@ -10,18 +10,18 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
-
+	console.log(msg);
 		var fileName = './tiltDetection.json';
 		var file = require(fileName);
-	fs.watch("./tiltDetection.json", function(event, fileName) {
+		fs.watch("./tiltDetection.json", function(event, fileName) {
 
-		console.log("watching");
-		
-		 jf.readFile('./tiltDetection.json', function(err, data) { //if change detected read the sports.json 
-		
-        var data = data; //store in a var
-		io.emit('chat message', data);
-		 });		
+			console.log("watching");
+			
+			 jf.readFile('./tiltDetection.json', function(err, data) { //if change detected 
+			
+			var data = data; //store in a var
+			io.emit('chat message2', data);
+			 });		
 	});
 	
   });
