@@ -21,23 +21,30 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var socket = io();
-      $('form').submit(function(){
-	  
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
-      });
-      socket.on('chat message2', function(msg){
-        //$('#messages').append($('<li>').text(msg));
+	var socket = io();
+		$('form').submit(function(){
+
+		socket.emit('chat message', $('#m').val());
+		$('#m').val('');
+		return false;
+	});
+	socket.on('chat message2', function(msg){
+		//$('#messages').append($('<li>').text(msg));
 		//console.log(msg+"index.html");
-		
+
+		$("#messages").append(msg);
 		console.log(msg);
-		if(msg["isTheBikeTilted"] === "yes"){
-			alert("The bike is being moved");
-		}
-		
-      });
+	});
+
+	socket.on('bikeMoved', function(msg){
+	//$('#messages').append($('<li>').text(msg));
+	//console.log(msg+"index.html");
+
+	$("#messages").append("<br>The bike has moved!!!");
+	console.log(msg);
+
+
+	});
     </script>
   </body>
 </html>

@@ -11,8 +11,11 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
 	  
-	  function notifyMovementDetected(data){
-		  io.emit('chat message2', data);
+	  //Notify client it has connected to the server
+	  io.emit('chat message2', "Connected");
+	  
+	  function notifyMovementDetected(parsedJSON){
+		  io.emit('bikeMoved', parsedJSON);
 	  }
 	  
 	console.log(msg);
@@ -23,7 +26,6 @@ io.on('connection', function(socket){
 			
 				var parsedJSON = require('./tiltDetection.json');
 				notifyMovementDetected(parsedJSON);			
-				
 			
 			//fs.readFile('./tiltDetection.json', 'utf8', function(err, data) { //if change detected 
 			//	console.log(data);
