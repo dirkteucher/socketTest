@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+#No need to track node_modules as all loaded in through the package.json
+node_modules/

@@ -10,23 +10,27 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
+	  
+	  function notifyMovementDetected(data){
+		  io.emit('chat message2', data);
+	  }
+	  
 	console.log(msg);
 		var fileName = './tiltDetection.json';
 		var file = require(fileName);
 		fs.watch("./tiltDetection.json", function(event, fileName) {
 
-			console.log("watching");
 			
-			 jf.readFile('./tiltDetection.json', function(err, data) { //if change detected 
+				var parsedJSON = require('./tiltDetection.json');
+				notifyMovementDetected(parsedJSON);			
+				
 			
-			var data = data; //store in a var
-			io.emit('chat message2', data);
-			 });		
+			//fs.readFile('./tiltDetection.json', 'utf8', function(err, data) { //if change detected 
+			//	console.log(data);
+			//});
 	});
-	
   });
 });
-
 
 
 http.listen(8080, function(){
